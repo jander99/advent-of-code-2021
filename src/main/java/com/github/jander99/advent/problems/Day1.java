@@ -7,19 +7,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
-
-@Component
 @Slf4j
-public class Problem1 {
+public class Day1 {
 
     private List<String> input;
     private List<Integer> slidingWindow;
 
-    public Problem1() throws IOException {
+    public Day1() throws IOException {
 
-        input = Files.readAllLines(Paths.get("src/main/resources/input.txt"));
+        input = Files.readAllLines(Paths.get("src/main/resources/day1input.txt"));
         log.info("There are {} numbers", input.size());
     }
 
