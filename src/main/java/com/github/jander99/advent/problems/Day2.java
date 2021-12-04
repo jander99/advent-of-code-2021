@@ -2,23 +2,13 @@ package com.github.jander99.advent.problems;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 @Slf4j
 public class Day2 {
 
-    List<String> inputData;
-
-    public Day2() throws Exception {
-        inputData = Files.readAllLines(Paths.get("src/main/resources/day2input.txt"));
-        log.info("There are {} numbers", inputData.size());
-    }
-
-    public void problem1() {
+    public int calculateDepthHeading(List<String> inputData) {
 
         AtomicInteger horiz = new AtomicInteger(0);
         AtomicInteger depth = new AtomicInteger(0);
@@ -36,10 +26,10 @@ public class Day2 {
 
         });
 
-        log.info("Solution: {}", horiz.get()*depth.get());
+        return horiz.get()*depth.get();
     }
 
-    public void problem2() {
+    public int calculateAimHeading(List<String> inputData) {
 
         AtomicInteger horiz = new AtomicInteger(0);
         AtomicInteger depth = new AtomicInteger(0);
@@ -59,7 +49,6 @@ public class Day2 {
 
         });
 
-        log.info("Solution: {}", horiz.get()*depth.get());
+        return horiz.get()*depth.get();
     }
-
 }
