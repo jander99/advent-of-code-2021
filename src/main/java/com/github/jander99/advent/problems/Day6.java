@@ -3,35 +3,59 @@ package com.github.jander99.advent.problems;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
 @Data
 public class Day6 {
 
-    List<Integer> fish;
+    List<List<Integer>> fishes;
+    int daysPassed = 0;
 
     public Day6() {
-        fish = new ArrayList<>();
+        fishes = new ArrayList<>();
     }
 
     public void setInitialFish(List<Integer> newFish) {
-        fish.addAll(newFish);
+        fishes.add(newFish);
     }
 
     public void passDay() {
-        List<Integer> newFish = new ArrayList<>();
 
-        fish.forEach(f -> {
-            if (f == 0) {
-                newFish.add(6);
-                newFish.add(8);
-            } else {
-                newFish.add(f-1);
-            }
+        List<Integer> nextGeneration = new ArrayList<>();
+        List<List<Integer>> oldGenerations = new ArrayList<>();
+
+        for(List<Integer> fishList : fishes) {
+            List<Integer> newFishList = new ArrayList<>();
+            fishList.forEach(fish -> {
+                if(fish == 0) {
+                    newFishList.add(6);
+                    nextGeneration.add(8);
+                } else {
+                    newFishList.add(fish-1);
+                }
+            });
+            oldGenerations.add(newFishList);
+        }
+
+        fishes = oldGenerations;
+
+        if (nextGeneration.size() > 0) {
+            fishes.add(nextGeneration);
+        }
+
+        daysPassed++;
+    }
+
+    public Long getTotalFishes() {
+        AtomicLong total = new AtomicLong(0);
+        fishes.forEach(fish -> {
+            total.getAndAdd(fish.size());
         });
 
-        fish = newFish;
+        return total.get();
     }
 }

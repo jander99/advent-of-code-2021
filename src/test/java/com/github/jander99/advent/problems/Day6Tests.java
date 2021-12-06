@@ -31,19 +31,15 @@ public class Day6Tests {
 
         Day6 day6 = new Day6();
         List<Integer> freshFish = Arrays
-                .stream(TEST_INPUT
-                        .get(0)
-                        .split(","))
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .toList();
+                .stream(TEST_INPUT.get(0).split(","))
+                .mapToInt(Integer::parseInt).boxed().toList();
 
         day6.setInitialFish(freshFish);
         int numDays = 80;
         for(int i=0;i<numDays;i++) {
             day6.passDay();
         }
-        int numFish = day6.getFish().size();
+        long numFish = day6.getTotalFishes();
         assertThat(numFish).isEqualTo(5934);
 
         day6 = new Day6();
@@ -60,12 +56,11 @@ public class Day6Tests {
         for(int i=0;i<numDays;i++) {
             day6.passDay();
         }
-        numFish = day6.getFish().size();
+        numFish = day6.getTotalFishes();
         log.info("Day 6, Part 1 {} ", numFish);
     }
 
     @Test
-//    @Disabled
     public void partTwo() {
 
         Day6 day6 = new Day6();
@@ -83,9 +78,9 @@ public class Day6Tests {
         for(int i=0;i<numDays;i++) {
             day6.passDay();
         }
-        BigInteger numFish = BigInteger.valueOf(day6.getFish().size());
+        long numFish = day6.getTotalFishes();
         log.info("Number of fish after {} days: {}", numDays, numFish);
-//        assertThat(numFish).isEqualTo(BigInteger.valueOf(26984457539L));
+        assertThat(numFish).isEqualTo(26984457539L);
 
 //        day6 = new Day6();
 //        freshFish = Arrays
