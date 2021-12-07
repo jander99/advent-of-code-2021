@@ -2,7 +2,6 @@ package com.github.jander99.advent.problems;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -28,12 +27,12 @@ public class Day5Tests {
     public void partOne() {
 
         Day5 day5 = new Day5();
-        day5.processInstructions(TEST_INPUT);
-        int dangerPoints = day5.howManyOverlappingLines(2);
+        day5.processInstructions(TEST_INPUT, false);
+        Long dangerPoints = day5.howManyOverlappingLines(2);
         assertThat(dangerPoints).isEqualTo(5);
 
         day5 = new Day5();
-        day5.processInstructions(REAL_INPUT);
+        day5.processInstructions(REAL_INPUT, false);
         dangerPoints = day5.howManyOverlappingLines(2);
         log.info("Day 5, Part 1 {} ", dangerPoints);
     }
@@ -42,12 +41,12 @@ public class Day5Tests {
     public void partTwo() {
 
         Day5 day5 = new Day5();
-        day5.processInstructions(TEST_INPUT);
-        int dangerPoints = day5.howManyOverlappingLines(2);
+        day5.processInstructions(TEST_INPUT, true);
+        Long dangerPoints = day5.howManyOverlappingLines(2);
         assertThat(dangerPoints).isEqualTo(12);
 
         day5 = new Day5();
-        day5.processInstructions(REAL_INPUT);
+        day5.processInstructions(REAL_INPUT, true);
         dangerPoints = day5.howManyOverlappingLines(2);
         log.info("Day 5, Part 2 {} ", dangerPoints);
 
