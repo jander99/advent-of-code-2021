@@ -3,59 +3,42 @@ package com.github.jander99.advent.problems;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
 @Data
 public class Day6 {
 
-    List<List<Integer>> fishes;
+    Long[] fishCounts;
     int daysPassed = 0;
 
     public Day6() {
-        fishes = new ArrayList<>();
+        fishCounts = new Long[]{0L,0L,0L,0L,0L,0L,0L,0L,0L};
     }
 
     public void setInitialFish(List<Integer> newFish) {
-        fishes.add(newFish);
+        newFish.forEach(i -> fishCounts[i]++);
     }
 
     public void passDay() {
-
-        List<Integer> nextGeneration = new ArrayList<>();
-        List<List<Integer>> oldGenerations = new ArrayList<>();
-
-        for(List<Integer> fishList : fishes) {
-            List<Integer> newFishList = new ArrayList<>();
-            fishList.forEach(fish -> {
-                if(fish == 0) {
-                    newFishList.add(6);
-                    nextGeneration.add(8);
-                } else {
-                    newFishList.add(fish-1);
-                }
-            });
-            oldGenerations.add(newFishList);
+        Long zeroFish = fishCounts[0];
+        for(int i=0;i<fishCounts.length;i++) {
+            if(i != fishCounts.length-1) {
+                fishCounts[i]=fishCounts[i+1];
+            } else {
+                fishCounts[i]=zeroFish;
+                fishCounts[6]+=zeroFish;
+            }
         }
-
-        fishes = oldGenerations;
-
-        if (nextGeneration.size() > 0) {
-            fishes.add(nextGeneration);
-        }
-
         daysPassed++;
     }
 
     public Long getTotalFishes() {
-        AtomicLong total = new AtomicLong(0);
-        fishes.forEach(fish -> {
-            total.getAndAdd(fish.size());
-        });
 
-        return total.get();
+        Long total = 0L;
+        for (Long fishCount : fishCounts) {
+            total += fishCount;
+        }
+        return total;
     }
 }

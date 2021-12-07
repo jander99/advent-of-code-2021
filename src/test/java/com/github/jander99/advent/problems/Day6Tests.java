@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -79,23 +80,22 @@ public class Day6Tests {
             day6.passDay();
         }
         long numFish = day6.getTotalFishes();
-        log.info("Number of fish after {} days: {}", numDays, numFish);
         assertThat(numFish).isEqualTo(26984457539L);
 
-//        day6 = new Day6();
-//        freshFish = Arrays
-//                .stream(REAL_INPUT
-//                        .get(0)
-//                        .split(","))
-//                .mapToInt(Integer::parseInt)
-//                .boxed()
-//                .toList();
-//
-//        day6.setInitialFish(freshFish);
-//        for(int i=0;i<numDays;i++) {
-//            day6.passDay();
-//        }
-//        numFish = BigInteger.valueOf(day6.getFish().size());
-//        log.info("Day 6, Part 1 {} ", numFish);
+        day6 = new Day6();
+        freshFish = Arrays
+                .stream(REAL_INPUT
+                        .get(0)
+                        .split(","))
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .toList();
+
+        day6.setInitialFish(freshFish);
+        for(int i=0;i<numDays;i++) {
+            day6.passDay();
+        }
+        numFish = day6.getTotalFishes();
+        log.info("Day 6, Part 2 {} ", numFish);
     }
 }

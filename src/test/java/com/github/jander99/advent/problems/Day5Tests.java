@@ -25,7 +25,6 @@ public class Day5Tests {
     }
 
     @Test
-    @Disabled
     public void partOne() {
 
         Day5 day5 = new Day5();
